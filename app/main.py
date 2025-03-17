@@ -9,10 +9,8 @@ class Person:
 
 
 def create_person_list(people_data: list[dict]) -> list[Person]:
-    for person_dict in people_data:
-        name = person_dict["name"]
-        age = person_dict["age"]
-        Person(name, age)
+    [Person(person_dict["name"], person_dict["age"])
+     for person_dict in people_data]
 
     person_list = []
     for person_dict in people_data:
@@ -21,11 +19,11 @@ def create_person_list(people_data: list[dict]) -> list[Person]:
 
         person_list.append(person)
 
-        if "wife" in person_dict and person_dict["wife"] is not None:
+        if person_dict.get("wife"):
             wife_name = person_dict["wife"]
             person.wife = Person.people[wife_name]
 
-        if "husband" in person_dict and person_dict["husband"] is not None:
+        if person_dict.get("husband"):
             husband_name = person_dict["husband"]
             person.husband = Person.people[husband_name]
 
